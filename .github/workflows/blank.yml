@@ -33,12 +33,25 @@ jobs:
         
       - name: Building application
         run: yarn build --env=production
-
-      - name: Cloud Storage Uploader
-        # You may pin to the exact commit or the version.
-        # uses: google-github-actions/upload-cloud-storage@c43ab88dab05a52b87417245e108fa54204a652f
-        uses: google-github-actions/upload-cloud-storage@v0.2.0
+        
+      - name: Push to GCR Github Action
+        uses: RafikFarhad/push-to-gcr-github-action@v3
         with:
-          credentials: ${{secrets.GCP_SERVICEKEY}}
-          path: dist
-          destination:  admin.simpleks.alissonmachado.com.br 
+          gcloud_service_key: ${{secrets.GCP_SERVICEKEY}}
+          project_id: ${{secrets.GCP_PROJECT}}
+          image_name: simpleks-admin
+          image_tag: latest
+          
+      - name: Cloud Run
+        uses: stefda/action-cloud-run@v1.0
+        with:
+          # Name of the docker image
+          image: gcr.io/${{secrets.GCP_PROJECT}}/simpleks-admin:latest
+          # Name of the service in Cloud Run
+          service: ${{secrets.GCP_SERVICE}}
+          # GCP project
+          project: ${{secrets.GCP_PROJECT}}
+          # GCP region
+          region: ${{secrets.GCP_REGION}}
+          # GCP service key with storage and run permissions
+          service key: ${{secrets.GCP_SERVICEKEY}}
