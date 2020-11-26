@@ -19,7 +19,9 @@ jobs:
   build:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
-
+    env:
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
@@ -33,25 +35,11 @@ jobs:
         
       - name: Building application
         run: yarn build --env=production
-        
-      - name: Push to GCR Github Action
-        uses: RafikFarhad/push-to-gcr-github-action@v3
+      
+      - name: S3 Deploy
+        uses: Reggionick/s3-deploy@v3.0.0
         with:
-          gcloud_service_key: ${{secrets.GCP_SERVICEKEY}}
-          project_id: ${{secrets.GCP_PROJECT}}
-          image_name: simpleks-admin
-          image_tag: latest
-          
-      - name: Cloud Run
-        uses: stefda/action-cloud-run@v1.0
-        with:
-          # Name of the docker image
-          image: gcr.io/${{secrets.GCP_PROJECT}}/simpleks-admin:latest
-          # Name of the service in Cloud Run
-          service: ${{secrets.GCP_SERVICE}}
-          # GCP project
-          project: ${{secrets.GCP_PROJECT}}
-          # GCP region
-          region: ${{secrets.GCP_REGION}}
-          # GCP service key with storage and run permissions
-          service key: ${{secrets.GCP_SERVICEKEY}}
+          folder: dist
+          bucket: ${{ secrets.S3_BUCKET }}
+          dist-id: ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }}
+
