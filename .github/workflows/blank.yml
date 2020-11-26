@@ -30,7 +30,7 @@ jobs:
         run: yarn install
         
       - name: Building application
-        run: yarn build --env=production
+        run: yarn build --mode production
 
       - name: Push to GCR Github Action
         uses: RafikFarhad/push-to-gcr-github-action@v3
