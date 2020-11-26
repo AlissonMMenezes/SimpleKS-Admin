@@ -58,13 +58,14 @@ router.beforeEach((to, from, next) => {
     next({path:'/login'})
   }else{
     axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.user}`
-    next()
     //  axios.get("http://localhost:8000/validateToken").then(response=>{
     //    console.log(response)
     //   next()  
     //  }).catch(error=>{
-    //    console.log(error)
-    //    router.push('/login')
+    //    if(from.path != "/login"){
+    //     console.log(error)
+    //     router.push('/login')
+    //    }       
     //  })
   }  
 })
