@@ -1,6 +1,6 @@
 <template>
   <div style="margin-top:10px;">
-  <b-button v-bind:href="'/post/new'" variant="outline-primary">New Post</b-button>
+  <router-link  class="btn btn-outline-primary" :to="'/post/new'" variant="outline-primary">New Post</router-link>
     <b-table striped hover :items="info.posts" :fields="fields" style="margin-top:10px;">
       <template #cell(title)="row">
         <router-link :to="'/'+row.item.post_name+'/edit'">
