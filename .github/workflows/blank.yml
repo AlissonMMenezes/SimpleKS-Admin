@@ -28,6 +28,9 @@ jobs:
       - name: Yarn CLI        
         uses: CultureHQ/actions-yarn@v1.0.1
         
+      - name: Installing dependencies
+        run: yarn install
+        
       - name: Building application
         run: yarn build --env=production
 
