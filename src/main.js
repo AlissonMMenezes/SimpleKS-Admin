@@ -53,31 +53,19 @@ const router = new VueRouter({
   routes 
 })
 
-// const store = new Vuex.Store({
-//   logged: {
-//     user: null
-//   },
-//   mutations: {
-//     increment (state) {
-//       state.count++
-//     }
-//   }
-// })
-
-
 router.beforeEach((to, from, next) => {
-  if (!localStorage.user) {
-    next({name: 'login'})
+  if ((localStorage.getItem("user") == null) && (to.path != "/login")) {
+    next({path:'/login'})
   }else{
     axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.user}`
-    axios.get("http://localhost:8000/validateToken").then(response=>{
-      console.log(response)
-      next()
-    }).catch(error=>{
-      console.log(error)
-      router.push('/login')
-    })
     next()
+    //  axios.get("http://localhost:8000/validateToken").then(response=>{
+    //    console.log(response)
+    //   next()  
+    //  }).catch(error=>{
+    //    console.log(error)
+    //    router.push('/login')
+    //  })
   }  
 })
 
