@@ -1,9 +1,11 @@
 <template>
     <div>
         <article class="post excerpt">
-            <h2 class="title">test</h2>
             <span class="post-content">  
-                here will be the homepage              
+                <b-card title="Adsense">
+                    <b-card-text>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</b-card-text>
+                    <b-card-text>Click the button to toggle the overlay:</b-card-text>                    
+                </b-card>           
             </span>        
         </article>
     </div>
@@ -20,7 +22,7 @@ import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 </script>
 <style scoped>
-h2.title {
+.card-title {
     color: #333;
     font-weight: 400;
     line-height: 140%;
