@@ -4,7 +4,7 @@
       <input type="hidden" ref="post-name" :value="info.post_name" />
       <input type="hidden" ref="post-type" :value="info.post_type" />
       <b-row>       
-        <b-col sm="10">
+        <b-col sm="9">
           <b-form-textarea
             v-model="info.title"
             size="lg"
@@ -14,15 +14,8 @@
         </b-col>
       </b-row>
       <b-row class="mt-2">      
-        <b-col sm="10">
-          <b-form-textarea
-            v-model="info.content"
-            class="editor-area"
-            size="lg"
-            placeholder="Large textarea"
-            rows="35"
-            :value="info.content"
-          ></b-form-textarea>
+        <b-col sm="9">
+          <vue-editor useCustomImageHandler @image-added="handleImageAdded" v-model="info.content" :value="info.content"></vue-editor>
         </b-col>
       </b-row>
       <b-row class="mt-2" >      
@@ -37,6 +30,9 @@
 <script>
 export default {
   name: 'Post',
+  components: {
+    VueEditor
+  },
   data:function(){ 
     console.log("===>"+window.location.pathname.split("/")[1])     
     return {
@@ -107,7 +103,27 @@ export default {
               alert(response.data.content)
             })
           }
+      },
+      handleImageAdded(file, Editor, cursorLocation, resetUploader){
+        var formData = new FormData();
+        formData.append("image", file);
+
+        axios({
+          url: "/images",
+          method: "POST",
+          data: formData
+        })
+          .then(result => {
+            let url = result.data.url; // Get url from response
+            Editor.insertEmbed(cursorLocation, "image", url);
+            resetUploader();
+          })
+          .catch(err => {
+            console.log(err);
+          });
+            
       }
+      
       
   }
 }
@@ -115,6 +131,7 @@ export default {
 
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
+import { VueEditor } from "vue2-editor";
 import axios from 'axios'
 </script>
 

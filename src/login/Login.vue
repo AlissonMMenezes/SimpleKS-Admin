@@ -5,7 +5,7 @@
                 <b-form-input v-model="username" placeholder="type your username" id="input-default"></b-form-input>
             </b-form-group>
             <b-form-group label-cols="4" label-cols-lg="2" label="Password" label-for="input-default">
-                <b-form-input v-model="password" placeholder="type your password" id="input-default"></b-form-input>
+                <b-form-input v-model="password" type="password" placeholder="type your password" id="input-default"></b-form-input>
             </b-form-group>
             <b-button variant="success" v-on:click="sendLogin()">Login</b-button>
         </b-container>
