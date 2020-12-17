@@ -4,6 +4,7 @@ import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 import axios from 'axios' 
 import VueRouter from 'vue-router'
 import Vuex from 'vuex'
+import VueMeta from 'vue-meta';
 
 // Components load
 import Homepage from './components/Homepage.vue'
@@ -23,6 +24,7 @@ Vue.use(BootstrapVue)
 Vue.use(IconsPlugin)
 Vue.use(VueRouter)
 Vue.use(Vuex)
+Vue.use(VueMeta);
 
 Vue.config.productionTip = false
 Vue.prototype.$http = axios

@@ -9,7 +9,7 @@
         <b-navbar-nav class="ml-auto">
             <b-nav-item-dropdown text="Profile" right>
                 <b-dropdown-item v-on:click="changePassword">Change Password</b-dropdown-item>
-                <b-dropdown-item href="#">Logout</b-dropdown-item>                
+                <b-dropdown-item v-on:click="logout">Logout</b-dropdown-item>                
             </b-nav-item-dropdown>
         </b-navbar-nav>
         </b-navbar>
@@ -33,7 +33,7 @@
             ></b-form-input>
             </b-form-group>
         </form>
-        </b-modal>
+        </b-modal>        
     </div>
 </template>
 
@@ -43,21 +43,39 @@ export default {
   name: 'Headers',
   data:function(){
     return{
-        new_password: null
+        new_password: null,
+        message: null,
+        dismissSecs: 10,
+        dismissCountDown: 0,
+        showDismissibleAlert: false
     }
 
   },
   methods:{
-      changePassword:function(){
-        this.$bvModal.show("modal-prevent-closing")
-      },
-      updatePassword:function(){
-          alert("updating password")
-          console.log(this.new_password)
-      }
+    changePassword:function(){
+    this.$bvModal.show("modal-prevent-closing")
+    },
+    updatePassword:function(){
+        axios({
+            method: "PUT",
+            url: "/password",
+            data: {"password":this.new_password}})
+        .then(result => {
+            alert(result.data.content)
+        }).catch(err => {
+            console.log(err);
+        })
+
+    },
+    logout(){
+        localStorage.removeItem("user")
+        window.location.href = "/"
+    }
+
   }
 }
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
+import axios from 'axios'
 </script>
