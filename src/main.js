@@ -30,6 +30,7 @@ Vue.config.productionTip = false
 Vue.prototype.$http = axios
 
 axios.defaults.baseURL = process.env.VUE_APP_BASE_URL
+axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
 
 const routes = [
   { path:"/login", component: Login},
