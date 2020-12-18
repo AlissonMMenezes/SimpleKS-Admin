@@ -1,17 +1,15 @@
 <template>
 <div>
-    <Headers />
-    <b-container fluid class="bv-example-row">
-          <b-row class="">
-            <b-col col md="2">
-              <Sidebar />
-            </b-col>              
-            <b-col col md="10">
-              <router-view></router-view>
-            </b-col>              
-          </b-row>         
-      </b-container>  
-      </div> 
+  <Headers />
+  <el-container>
+      <el-aside>
+        <Sidebar />
+      </el-aside>              
+      <el-main>
+        <router-view></router-view>
+      </el-main>              
+  </el-container>  
+</div> 
     
 </template>
 

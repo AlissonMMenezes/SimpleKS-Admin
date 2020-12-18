@@ -1,16 +1,20 @@
 <template>
-    <div id="app">
-        <b-container class="" style="margin-top: 10%;">
-            <b-form-group label-cols="4" label-cols-lg="2" label="Login" label-for="input-default">
-                <b-form-input v-model="username" placeholder="type your username" id="input-default"></b-form-input>
-            </b-form-group>
-            <b-form-group label-cols="4" label-cols-lg="2" label="Password" label-for="input-default">
-                <b-form-input v-model="password" type="password" placeholder="type your password" id="input-default"></b-form-input>
-            </b-form-group>
-            <b-button variant="success" v-on:click="sendLogin()">Login</b-button>
-        </b-container>
-        
-    </div>    
+    <el-main id="app" width="200px">
+        <el-card class="box-card">
+            <div slot="header" class="clearfix">
+                <span>Simple KS - Sign in</span>
+            </div>
+            <el-form >
+            <el-form-item label="Login">
+                <el-input  v-model="username" placeholder="type your username" id="input-default"></el-input >
+                </el-form-item>
+                <el-form-item label="Password">
+                    <el-input  v-model="password" type="password" placeholder="type your password" id="input-default"></el-input >
+                </el-form-item>
+                <el-button variant="success" v-on:click="sendLogin()">Login</el-button>
+            </el-form  >
+        </el-card>
+    </el-main>    
 </template>
 
 <script>
@@ -41,3 +45,9 @@ import axios from 'axios'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 </script>   
+<style scoped>
+.box-card {
+    width: 480px;
+    margin: 0 auto;
+  }
+</style>

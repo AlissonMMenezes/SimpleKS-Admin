@@ -1,30 +1,31 @@
 <template>
-  <article class="post excerpt" style="padding-top: 20px;">
-    <b-container fluid>
-      <input type="hidden" ref="post-name" :value="info.post_name" />
-      <input type="hidden" ref="post-type" :value="info.post_type" />
-      <b-row>       
-        <b-col sm="9">
-          <b-form-textarea
-            v-model="info.title"
-            size="lg"
-            placeholder="Small textarea"
-            :value="info.title"
-          ></b-form-textarea>
-        </b-col>
-      </b-row>
-      <b-row class="mt-2">      
-        <b-col sm="9">
-          <vue-editor useCustomImageHandler @image-added="handleImageAdded" v-model="info.content" :value="info.content"></vue-editor>
-        </b-col>
-      </b-row>
-      <b-row class="mt-2" >      
-        <b-button style="margin-left: 20px;" variant="success" v-on:click="savePost">Publish</b-button>
-        <b-button style="margin-left: 20px;" variant="warning">Save Draft</b-button>
-        <b-button style="margin-left: 20px;" variant="danger">Delete</b-button>
-      </b-row>
-    </b-container>
-  </article>
+    <div style="margin-top:-30px;">
+      <el-input type="hidden" ref="post-name" :value="info.post_name" />
+      <el-input type="hidden" ref="post-type" :value="info.post_type" />
+      <el-row :gutter="50" style="margin-bottom: 10px;">       
+        <el-col :span="20">
+          <el-input size="large" v-model="info.title" :value="info.title"></el-input>
+        </el-col>
+      </el-row>
+      <el-row :gutter="20">      
+        <el-col :span="20">
+          <vue-editor id="editor1" useCustomImageHandler @image-added="handleImageAdded" v-model="info.content" :value="info.content"></vue-editor>
+        </el-col>
+        <el-col :span="3">
+          <el-card class="box-card">
+            <div slot="header" class="clearfix">
+              <span>Publish</span>
+            </div>
+            <div class="text item">
+              <el-button style="margin-left: 20px;" type="success" v-on:click="savePost">Publish</el-button>
+              <el-button style="margin-left: 20px;" type="warning">Save Draft</el-button>
+              <el-button style="margin-left: 20px;" type="danger">Delete</el-button>
+            </div>          
+          </el-card >
+        </el-col>
+      </el-row>   
+ 
+    </div>
 </template>
 
 <script>
@@ -135,7 +136,7 @@ import { VueEditor } from "vue2-editor";
 import axios from 'axios'
 </script>
 
-<style scoped>
+<style>
 #title {
     padding: 3px 8px;
     font-size: 1.7em;
@@ -147,16 +148,8 @@ import axios from 'axios'
     background-color: #fff;
 }
 
-.editor-area {
-    font-family: Consolas,Monaco,monospace;
-    font-size: 13px;
-    padding: 10px;
-    margin: 1px 0 0;
-    line-height: 150%;
-    border: 0;
-    outline: 0;
-    display: block;
-    resize: vertical;
-    box-sizing: border-box;
+ #editor1{
+  height: 500px;
+  overflow: auto !important;
 }
 </style>

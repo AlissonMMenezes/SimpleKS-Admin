@@ -1,39 +1,29 @@
 <template>
     <div>        
-        <b-navbar toggleable="lg" type="dark" variant="info">
-            <b-navbar-brand>Alisson Machado</b-navbar-brand>
-
-            <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
-            <b-collapse id="nav-collapse" is-nav>
-            </b-collapse>
-        <b-navbar-nav class="ml-auto">
-            <b-nav-item-dropdown text="Profile" right>
-                <b-dropdown-item v-on:click="changePassword">Change Password</b-dropdown-item>
-                <b-dropdown-item v-on:click="logout">Logout</b-dropdown-item>                
-            </b-nav-item-dropdown>
-        </b-navbar-nav>
-        </b-navbar>
-        <b-modal
-        id="modal-prevent-closing"
-        ref="modal"
-        title="Change your password"
-        @ok="updatePassword"
+        <el-menu class="el-menu-demo" mode="horizontal"   background-color="#545c64"
+  text-color="#fff"
+  active-text-color="#ffd04b">
+            <router-link to="/" tag="el-menu-item">Alisson Machado</router-link>
+        <el-submenu index="2">
+            <template slot="title" style="float: right;">Profile</template>
+                <el-menu-item  v-on:click="dialogVisible = true">Change Password</el-menu-item >
+                <el-menu-item  v-on:click="logout">Logout</el-menu-item >                
+        </el-submenu>
+        </el-menu>
+        <el-dialog
+        title="Change your Password"
+        :visible.sync="dialogVisible"
         >
-        <form ref="form" @submit.stop.prevent="handleSubmit">
-            <b-form-group
-            label="New Password"
-            label-for="name-input"
-            invalid-feedback="Name is required"
-            >
-            <b-form-input
-                type="password"
-                id="name-input"
-                v-model="new_password"
-                required
-            ></b-form-input>
-            </b-form-group>
-        </form>
-        </b-modal>        
+        <el-form ref="form" @submit.stop.prevent="handleSubmit">
+            <el-form-item label="New Password" label-for="name-input" invalid-feedback="Name is required" >
+            <el-input type="password" id="name-input" v-model="new_password" required></el-input>
+            </el-form-item>
+        </el-form>
+        <span slot="footer" class="dialog-footer">
+            <el-button @click="dialogFormVisible = false">Cancel</el-button>
+            <el-button type="primary" v-on:click="updatePassword">Confirm</el-button>
+        </span>
+        </el-dialog>        
     </div>
 </template>
 
@@ -44,10 +34,7 @@ export default {
   data:function(){
     return{
         new_password: null,
-        message: null,
-        dismissSecs: 10,
-        dismissCountDown: 0,
-        showDismissibleAlert: false
+        dialogVisible: false
     }
 
   },
@@ -65,6 +52,8 @@ export default {
         }).catch(err => {
             console.log(err);
         })
+        this.dialogVisible = false
+
 
     },
     logout(){

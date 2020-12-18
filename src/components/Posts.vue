@@ -1,14 +1,33 @@
 <template>
-  <div style="margin-top:10px;">
-  <router-link  class="btn btn-outline-primary" :to="'/post/new'" variant="outline-primary">New Post</router-link>
-    <b-table striped hover :items="info.posts" :fields="fields" style="margin-top:10px;">
+  <el-card class="box-card">
+    <div slot="header" class="clearfix">
+      <span>Posts</span>
+      <router-link style="margin-left: 10px;" class="el-button" plan :to="'/post/new'" >New Post</router-link>
+    </div>
+    <el-table :data="info">
+      <el-table-column prop="title" label="title">
+        <template slot-scope="scope">
+        <el-button          
+          type="text"
+          size="small">
+          <router-link :to="'/'+scope.row.post_name+'/edit'">
+            {{scope.row.title}}
+          </router-link>          
+        </el-button>
+      </template>
+      </el-table-column>
+      <el-table-column prop="author" label="author"></el-table-column>
+      <el-table-column prop="categories" label="categories"></el-table-column>
+      <el-table-column prop="comments" label="comments"></el-table-column>
+      <el-table-column prop="date" label="date"> </el-table-column>
+<!-- 
       <template #cell(title)="row">
         <router-link :to="'/'+row.item.post_name+'/edit'">
           {{row.item.title}}
         </router-link>
-      </template>
-    </b-table>
-  </div>
+      </template> -->
+    </el-table>
+  </el-card>
 </template>
 
 <script>
@@ -23,7 +42,7 @@
   mounted:function(){  
       axios.get('/posts')
       .then(
-        response => (this.info = response.data))
+        response => (this.info = response.data.posts))
   }
   }
 

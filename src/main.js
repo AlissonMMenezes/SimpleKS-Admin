@@ -1,10 +1,12 @@
 import Vue from 'vue'
 import App from './App.vue'
-import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
+//import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 import axios from 'axios' 
 import VueRouter from 'vue-router'
 import Vuex from 'vuex'
 import VueMeta from 'vue-meta';
+import ElementUI from 'element-ui';
+import 'element-ui/lib/theme-chalk/index.css';
 
 // Components load
 import Homepage from './components/Homepage.vue'
@@ -19,9 +21,9 @@ import Users from './components/Users.vue'
 import Home from './components/Home.vue'
 import Login from './login/Login.vue'
 
-
-Vue.use(BootstrapVue)
-Vue.use(IconsPlugin)
+Vue.use(ElementUI);
+//Vue.use(BootstrapVue)
+//Vue.use(IconsPlugin)
 Vue.use(VueRouter)
 Vue.use(Vuex)
 Vue.use(VueMeta);
@@ -66,7 +68,9 @@ router.beforeEach((to, from, next) => {
         next()  
       }).catch(error=>{
         console.log(error)
-        localStorage.removeItem("user")   
+        localStorage.removeItem("user") 
+        next()
+
       })
   }else{
     next()
