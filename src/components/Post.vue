@@ -112,7 +112,6 @@ export default {
           url: "/images",
           method: "POST",
           data: formData,
-          headers: { 'Content-Type': 'application/json'}
         })
           .then(result => {
             let url = result.data.url; // Get url from response
