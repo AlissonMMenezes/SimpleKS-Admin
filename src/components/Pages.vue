@@ -1,6 +1,9 @@
 <template>
-  <div style="margin-top:10px;">
-    <router-link class="btn btn-outline-primary" :to="'/page/new'" variant="outline-primary">New Page</router-link>
+  <el-card class="box-card">
+    <div slot="header" class="clearfix">
+      <span>Pages</span>
+      <router-link style="margin-left: 10px;" class="el-button" :to="'/page/new'">New Page</router-link>
+    </div>
     <el-table :data="info">
       <el-table-column prop="name" label="name">
         <template slot-scope="scope">
@@ -15,7 +18,7 @@
       </el-table-column>
       <el-table-column prop="author" label="author"></el-table-column>
     </el-table>
-  </div>
+  </el-card>
 </template>
 
 
@@ -29,7 +32,7 @@
     }
     ,
   mounted:function(){  
-      axios.get('/pages')
+      axios.get('/admin/pages')
       .then(
         response => (this.info = response.data.pages))
   }

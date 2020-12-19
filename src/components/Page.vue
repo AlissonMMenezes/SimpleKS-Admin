@@ -2,14 +2,25 @@
     <div style="margin-top:-30px;">
       <el-input type="hidden" ref="post-name" :value="info.post_name" />
       <el-input type="hidden" ref="post-type" :value="info.post_type" />
-      <el-row :gutter="50" style="margin-bottom: 10px;">       
-        <el-col :span="20">
-          <el-input size="large" v-model="info.title" :value="info.title"></el-input>
+      <el-row style="margin-bottom: 10px;">       
+        <el-col :span="10">
+          <el-input size="large" v-model="info.title" placeholder="Page Title"></el-input>
         </el-col>
-      </el-row>     
-      <el-row :gutter="20">      
+        <el-col :span="10">
+          <span style="margin-left:10px; margin-right:10px;">Page Type</span>
+          <el-select v-model="value" placeholder="Select">
+            <el-option
+              v-for="item in options"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value">
+            </el-option>
+          </el-select>
+        </el-col>
+      </el-row>
+      <el-row>      
         <el-col :span="20">
-          <vue-editor id="editor1" useCustomImageHandler @image-added="handleImageAdded" v-model="info.content" :value="info.content"></vue-editor>
+          <vue-editor id="editor1" useCustomImageHandler @image-added="handleImageAdded" v-model="info.content" :value="info.content" placeholder="Page Content"></vue-editor>
         </el-col>
         <el-col :span="3">
           <el-card class="box-card">
@@ -17,7 +28,7 @@
               <span>Publish</span>
             </div>
             <div class="text item">
-              <el-button  size="mini" type="success" v-on:click="savePost();publish=true" >Publish</el-button><br/>
+              <el-button  size="mini" type="success" v-on:click="savePost(); publish=true" >Publish</el-button><br/>
               <el-button  size="mini" type="warning" v-on:click="savePost(); publish=false" >Save Draft</el-button><br/>
               <el-button  size="mini" type="danger">Delete</el-button><br/>
             </div>          
@@ -37,8 +48,14 @@ export default {
   data:function(){ 
     console.log("===>"+window.location.pathname.split("/")[1])     
     return {
-        info : {"title": "New Title", "content":"New Content", "post_type":window.location.pathname.split("/")[1]},
-        publish: false
+        info : {"title": "", "content":"", "post_type":"page"},
+        publish: false,
+        options:[
+          {value:"content", "label":"Content"},
+          {value:"cards","label":"Cards"},
+          {value:"posts", "label":"Posts"}
+          ],
+        value: 'content'
 
     }    
   },
@@ -56,8 +73,6 @@ export default {
             console.log("New Post")
             this.info.post_type = "post"
           }
-          this.info.title = "New Title"
-          this.info.content = "New Content"
         }
 
       })

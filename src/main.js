@@ -13,6 +13,7 @@ import Homepage from './components/Homepage.vue'
 import Posts from './components/Posts.vue'
 import Pages from './components/Pages.vue'
 import Post from './components/Post.vue'
+import Page from './components/Page.vue'
 import Settings from './components/Settings.vue'
 import Themes from './components/Themes.vue'
 import Comments from './components/Comments.vue'
@@ -43,7 +44,7 @@ const routes = [
       { path: '/pages', component: Pages },
       { path: '/:post_name/edit', component: Post },
       { path: '/post/new', component: Post },
-      { path: '/page/new', component: Post },
+      { path: '/page/new', component: Page },
       { path: '/themes', component: Themes },
       { path: '/comments', component: Comments },
       { path: '/subscribers', component: Subscribers },

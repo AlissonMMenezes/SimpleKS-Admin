@@ -19,7 +19,7 @@
       <el-table-column prop="author" label="author"></el-table-column>
       <el-table-column prop="categories" label="categories"></el-table-column>
       <el-table-column prop="comments" label="comments"></el-table-column>
-      <el-table-column prop="date" label="date"> </el-table-column>
+      <el-table-column prop="post_date" label="date"> </el-table-column>
 <!-- 
       <template #cell(title)="row">
         <router-link :to="'/'+row.item.post_name+'/edit'">
@@ -40,7 +40,7 @@
     }
     ,
   mounted:function(){  
-      axios.get('/posts')
+      axios.get('/admin/posts')
       .then(
         response => (this.info = response.data.posts))
   }

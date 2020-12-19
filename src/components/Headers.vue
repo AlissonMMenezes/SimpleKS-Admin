@@ -1,11 +1,9 @@
 <template>
     <div>        
-        <el-menu class="el-menu-demo" mode="horizontal"   background-color="#545c64"
-  text-color="#fff"
-  active-text-color="#ffd04b">
+        <el-menu class="el-menu-demo" mode="horizontal">
             <router-link to="/" tag="el-menu-item">Alisson Machado</router-link>
         <el-submenu index="2">
-            <template slot="title" style="float: right;">Profile</template>
+            <template slot="title" style="float: right; padding: 3px 0">Profile</template>
                 <el-menu-item  v-on:click="dialogVisible = true">Change Password</el-menu-item >
                 <el-menu-item  v-on:click="logout">Logout</el-menu-item >                
         </el-submenu>
@@ -20,7 +18,7 @@
             </el-form-item>
         </el-form>
         <span slot="footer" class="dialog-footer">
-            <el-button @click="dialogFormVisible = false">Cancel</el-button>
+            <el-button @click="dialogVisible = false">Cancel</el-button>
             <el-button type="primary" v-on:click="updatePassword">Confirm</el-button>
         </span>
         </el-dialog>        
