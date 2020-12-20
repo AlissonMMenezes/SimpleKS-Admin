@@ -10,7 +10,7 @@
         <el-button          
           type="text"
           size="small">
-          <router-link :to="'/'+scope.row.post_name+'/edit'">
+          <router-link :to="'/page/'+scope.row.page_name+'/edit'">
             {{scope.row.title}}
           </router-link>          
         </el-button>

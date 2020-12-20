@@ -43,6 +43,7 @@ const routes = [
       { path: '/posts', component: Posts },
       { path: '/pages', component: Pages },
       { path: '/:post_name/edit', component: Post },
+      { path: '/page/:post_name/edit', component: Page },
       { path: '/post/new', component: Post },
       { path: '/page/new', component: Page },
       { path: '/themes', component: Themes },

@@ -28,8 +28,8 @@
               <span>Publish</span>
             </div>
             <div class="text item">
-              <el-button  size="mini" type="success" v-on:click="savePost(); publish=true" >Publish</el-button><br/>
-              <el-button  size="mini" type="warning" v-on:click="savePost(); publish=false" >Save Draft</el-button><br/>
+              <el-button  size="mini" type="success" v-on:click="savePage(); publish=true" >Publish</el-button><br/>
+              <el-button  size="mini" type="warning" v-on:click="savePage(); publish=false" >Save Draft</el-button><br/>
               <el-button  size="mini" type="danger">Delete</el-button><br/>
             </div>          
           </el-card >
@@ -41,36 +41,37 @@
 
 <script>
 export default {
-  name: 'Post',
+  name: 'Page',
   components: {
     VueEditor
   },
   data:function(){ 
-    console.log("===>"+window.location.pathname.split("/")[1])     
+    console.log("===>"+window.location.pathname.split("/")[2])     
     return {
         info : {"title": "", "content":"", "post_type":"page"},
         publish: false,
         options:[
           {value:"content", "label":"Content"},
           {value:"cards","label":"Cards"},
-          {value:"posts", "label":"Posts"}
+          {value:"posts", "label":"Pages"}
           ],
         value: 'content'
 
     }    
   },
   mounted:function(){  
-      console.log(window.location.pathname.split("/")[1])
-      axios.get('/posts/'+window.location.pathname.split("/")[1])
+      console.log(window.location.pathname.split("/")[2])
+      axios.get('/posts/'+window.location.pathname.split("/")[2])
       .then(response => {
         if(response.data){
           this.info = response.data
+          this.value = this.info.layout
         }else{
-          if(window.location.pathname.split("/")[1] == "page"){
+          if(window.location.pathname.split("/")[2] == "page"){
             console.log("New page")
             this.info.post_type = "page"
           }else{
-            console.log("New Post")
+            console.log("New Page")
             this.info.post_type = "post"
           }
         }
@@ -78,25 +79,28 @@ export default {
       })
   },
   methods: {    
-    savePost(event){
+    savePage(event){
       console.log(event)
       var title = this.info.title
       var content = this.info.content
       var name = this.info.post_name
       var post_type = this.info.post_type
       var publish = this.publish
+      var layout = this.value
       console.log(title)
       console.log(name)
+      console.log(layout)
 
       
       if(!name){
         
-         axios.post('/admin/posts',
+         axios.post('/admin/pages',
         {
           "Title": title,
           "Content": content,
-          "Post_Type": post_type,
-          "Publish":publish},
+          "Page_Type": post_type,
+          "Publish":publish,
+          "layout": layout},
         { headers: {
           'Content-Type': 'application/json'
         }}
@@ -107,12 +111,13 @@ export default {
         })
 
       }else{
-        axios.put('/admin/posts/'+name,
+        axios.put('/admin/pages/'+name,
             {
               "Title": title,
               "Content": content,
-              "Post_Name": name,
-              "Post_Type":post_type,
+              "Page_Name": name,
+              "Page_Type":post_type,
+              "layout": layout
               },
             { headers: {
               'Content-Type': 'application/json'
