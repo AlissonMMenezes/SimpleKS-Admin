@@ -17,7 +17,7 @@
               <span>Publish</span>
             </div>
             <div class="text item">
-              <el-button  size="mini" type="success" v-on:click="savePost();publish=true" >Publish</el-button><br/>
+              <el-button  size="mini" type="success" v-on:click="savePost(); publish=true" >Publish</el-button><br/>
               <el-button  size="mini" type="warning" v-on:click="savePost(); publish=false" >Save Draft</el-button><br/>
               <el-button  size="mini" type="danger">Delete</el-button><br/>
             </div>          
@@ -72,6 +72,8 @@ export default {
       var publish = this.publish
       console.log(title)
       console.log(name)
+      console.log(name)
+
 
       
       if(!name){
