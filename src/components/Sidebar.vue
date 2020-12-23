@@ -5,8 +5,10 @@
             <el-col>
                 <router-link to="/" tag="el-menu-item">Home</router-link>            
                 <router-link to="/posts" tag="el-menu-item">Posts</router-link>
+                <router-link to="/categories" tag="el-menu-item">Categories</router-link>
                 <router-link to="/pages" tag="el-menu-item">Pages</router-link>
                 <router-link to="/comments" tag="el-menu-item">Comments</router-link>
+                <router-link to="/media" tag="el-menu-item">Media</router-link>
                 <router-link to="/subscribers" tag="el-menu-item">Subscribers</router-link>
                 <router-link to="/themes" tag="el-menu-item">Themes</router-link>
                 <router-link to="/users" tag="el-menu-item">Users</router-link>

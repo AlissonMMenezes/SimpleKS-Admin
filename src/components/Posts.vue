@@ -20,12 +20,6 @@
       <el-table-column prop="categories" label="categories"></el-table-column>
       <el-table-column prop="comments" label="comments"></el-table-column>
       <el-table-column prop="post_date" label="date"> </el-table-column>
-<!-- 
-      <template #cell(title)="row">
-        <router-link :to="'/'+row.item.post_name+'/edit'">
-          {{row.item.title}}
-        </router-link>
-      </template> -->
     </el-table>
   </el-card>
 </template>

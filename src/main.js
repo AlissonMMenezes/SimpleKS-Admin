@@ -21,6 +21,9 @@ import Subscribers from './components/Subscribers.vue'
 import Users from './components/Users.vue'
 import Home from './components/Home.vue'
 import Login from './login/Login.vue'
+import Media from './components/Media.vue'
+import Categories from './components/Categories.vue'
+
 
 Vue.use(ElementUI);
 //Vue.use(BootstrapVue)
@@ -50,7 +53,9 @@ const routes = [
       { path: '/comments', component: Comments },
       { path: '/subscribers', component: Subscribers },
       { path: '/users', component: Users },
-      { path: '/settings', component: Settings }
+      { path: '/settings', component: Settings },
+      { path: '/media', component: Media },
+      { path: '/categories', component: Categories }
     ]},  
 
 ]
