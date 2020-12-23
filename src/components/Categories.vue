@@ -18,7 +18,7 @@
     </el-table-column>
     <el-table-column label="">
       <template slot-scope="scope">        
-        <el-button size="small" type="primary" v-on:click="selectFile(); category=scope.row">Upload</el-button>
+        <el-button size="small" type="primary" v-on:click="selectFile(); category=scope.row.name">Upload</el-button>
       </template>
     </el-table-column>
   </el-table>
